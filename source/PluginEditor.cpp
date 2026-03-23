@@ -1,48 +1,40 @@
 #include "PluginEditor.h"
 
-PluginEditor::PluginEditor (PluginProcessor& p)
-    : AudioProcessorEditor (&p), processorRef (p)
+StepSequencerAudioProcessorEditor::StepSequencerAudioProcessorEditor (StepSequencerAudioProcessor& p)
+: AudioProcessorEditor (&p), processor (p)
 {
-    juce::ignoreUnused (processorRef);
+    setSize (400, 400);
+}
 
-    addAndMakeVisible (inspectButton);
+void StepSequencerAudioProcessorEditor::paint (juce::Graphics& g)
+{
+    g.fillAll(juce::Colours::black);
 
-    // this chunk of code instantiates and opens the melatonin inspector
-    inspectButton.onClick = [&] {
-        if (!inspector)
+    int size = 40;
+
+    for (int y = 0; y < 8; y++)
+    {
+        for (int x = 0; x < 8; x++)
         {
-            inspector = std::make_unique<melatonin::Inspector> (*this);
-            inspector->onClose = [this]() { inspector.reset(); };
+            int i = y * 8 + x;
+
+            g.setColour(processor.getStep(i) ? juce::Colours::red : juce::Colours::darkgrey);
+            g.fillRect(x * size, y * size, size - 2, size - 2);
         }
-
-        inspector->setVisible (true);
-    };
-
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    }
 }
 
-PluginEditor::~PluginEditor()
-{
-}
+void StepSequencerAudioProcessorEditor::resized() {}
 
-void PluginEditor::paint (juce::Graphics& g)
+void StepSequencerAudioProcessorEditor::mouseDown(const juce::MouseEvent& e)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    int size = 40;
 
-    auto area = getLocalBounds();
-    g.setColour (juce::Colours::white);
-    g.setFont (16.0f);
-    auto helloWorld = juce::String ("Hello from ") + PRODUCT_NAME_WITHOUT_VERSION + " v" VERSION + " running in " + CMAKE_BUILD_TYPE;
-    g.drawText (helloWorld, area.removeFromTop (150), juce::Justification::centred, false);
-}
+    int x = e.x / size;
+    int y = e.y / size;
 
-void PluginEditor::resized()
-{
-    // layout the positions of your child components here
-    auto area = getLocalBounds();
-    area.removeFromBottom(50);
-    inspectButton.setBounds (getLocalBounds().withSizeKeepingCentre(100, 50));
+    int i = y * 8 + x;
+
+    processor.setStep(i, !processor.getStep(i));
+    repaint();
 }
