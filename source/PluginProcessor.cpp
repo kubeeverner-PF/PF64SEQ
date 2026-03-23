@@ -87,7 +87,7 @@ void StepSequencerAudioProcessor::sendDrum(int step, juce::MidiBuffer& midi)
 void StepSequencerAudioProcessor::setStep(int i, bool s) { steps[i] = s; }
 bool StepSequencerAudioProcessor::getStep(int i) const { return steps[i]; }
 
-juce::AudioProcessorEditor* StepSequencerAudioProcessor::createEditor()
+juce::AudioProcessorEditor* PF64SEQAudioProcessor::createEditor()
 {
-    return new PF64SEQ (*this);
+    return new PF64SEQAudioProcessorEditor (*this);
 }
