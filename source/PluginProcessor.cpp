@@ -1,8 +1,8 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-StepSequencerAudioProcessor::StepSequencerAudioProcessor() {}
-StepSequencerAudioProcessor::~StepSequencerAudioProcessor() {}
+PF64SEQAudioProcessor::PF64SEQAudioProcessor() {}
+PF64SEQAudioProcessor::~PF64SEQAudioProcessor() {}
 
 void StepSequencerAudioProcessor::prepareToPlay (double sr, int)
 {
