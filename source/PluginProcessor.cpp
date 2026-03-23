@@ -89,5 +89,5 @@ bool StepSequencerAudioProcessor::getStep(int i) const { return steps[i]; }
 
 juce::AudioProcessorEditor* StepSequencerAudioProcessor::createEditor()
 {
-    return new StepSequencerAudioProcessorEditor (*this);
+    return new PF64SEQ (*this);
 }
