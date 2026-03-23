@@ -1,8 +1,8 @@
 #include "PluginEditor.h"
 
-StepSequencerAudioProcessorEditor::StepSequencerAudioProcessorEditor (StepSequencerAudioProcessor& p)
+PF64SEQAudioProcessorEditor::PF64SEQAudioProcessorEditor (PF64SEQAudioProcessor& p)
 : AudioProcessorEditor (&p), processor (p)
-{
+{}
     setSize (400, 400);
 }
 
