@@ -1,7 +1,7 @@
 #pragma once
 #include <JuceHeader.h>
 
-class PF64SEQ  : public juce::AudioProcessor
+class PF64SEQAudioProcessor  : public juce::AudioProcessor
 {
 public:
     StepSequencerAudioProcessor();
