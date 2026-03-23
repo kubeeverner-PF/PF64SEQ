@@ -2,7 +2,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
-class StepSequencerAudioProcessorEditor  : public juce::AudioProcessorEditor
+class PF64SEQAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
     StepSequencerAudioProcessorEditor (StepSequencerAudioProcessor&);
